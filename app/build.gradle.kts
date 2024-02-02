@@ -71,6 +71,8 @@ dependencies {
     kapt(Dependencies.hiltCompiler)
     kapt(Dependencies.hiltAndroidCompiler)
 
+    implementation(Dependencies.hiltNavigationCompose)
+
 }
 kapt {
     correctErrorTypes = true
