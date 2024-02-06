@@ -1,4 +1,4 @@
-package com.example.newsinshort
+package com.example.newsinshort.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,12 +9,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.newsinshort.ui.navigation.AppNavigationGraph
 import com.example.newsinshort.ui.theme.NewsInShortTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             NewsInShortTheme {
                 Surface(
@@ -22,7 +24,6 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(Color.White)
                 ) {
-
                     AppEntryPoint()
                 }
             }
