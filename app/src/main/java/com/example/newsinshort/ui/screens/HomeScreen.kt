@@ -30,13 +30,15 @@ fun HomeScreen(newsViewModel: NewsViewModel = hiltViewModel()) {
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f
-    ) {
-        100
-    }
+    )
+
 
     VerticalPager(
-        state = pagerState, modifier = Modifier.fillMaxSize(), pageSize = PageSize.Fill,
-        pageSpacing = 8.dp
+        state = pagerState,
+        modifier = Modifier.fillMaxSize(),
+        pageSize = PageSize.Fill,
+        pageSpacing = 8.dp,
+        pageCount = 100
     ) { page ->
 
         when (newsRes) {

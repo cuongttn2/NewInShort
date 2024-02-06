@@ -3,6 +3,7 @@ package com.example.newsinshort.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -68,7 +70,8 @@ fun NormalTextComponent(textValue: String) {
         text = textValue,
         style = TextStyle(
             fontSize = 18.sp, fontWeight = FontWeight.Normal
-        )
+        ),
+        fontFamily = FontFamily.Monospace
     )
 }
 
@@ -90,8 +93,20 @@ fun NewsRowComponent(page: Int, article: Article) {
             placeholder = painterResource(id = R.drawable.ic_placeholder_image),
             error = painterResource(id = R.drawable.ic_placeholder_image)
         )
+
         Spacer(modifier = Modifier.size(20.dp))
-        NormalTextComponent(textValue = article.title ?: "")
+
+        HeadingTextComponent(textValue = article.title ?: "")
+
+        Spacer(modifier = Modifier.size(10.dp))
+
+        NormalTextComponent(textValue = article.content ?: "")
+
+        Spacer(modifier = Modifier.size(10.dp))
+
+        AuthorDetailComponent(article.author, article.source?.name)
+
+
     }
 }
 
@@ -109,5 +124,31 @@ fun NewsRowComponentPreview() {
         url = null,
     )
     NewsRowComponent(0, article)
+}
+
+@Composable
+fun HeadingTextComponent(textValue: String) {
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(8.dp),
+        text = textValue,
+        style = TextStyle(
+            fontSize = 24.sp, fontWeight = FontWeight.Medium
+        )
+    )
+}
+
+@Composable
+fun AuthorDetailComponent(authorName: String?, sourceName: String?) {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        authorName?.also {
+            NormalTextComponent(textValue = it)
+        }
+        sourceName?.also {
+            NormalTextComponent(textValue = it)
+        }
+    }
 }
 
